@@ -1,0 +1,30 @@
+{% extends 'birth/base.html' %}
+
+{% block content %}
+<h1>Birth Certificate Instructions</h1>
+
+<div class="instructions">
+    <ul>
+        <li>Ensure that names, birth dates, and parent information match the documents.</li>
+        <li>AI assistance will highlight missing or incorrect information in red.</li>
+        <li>Only upload clear, scanned copies of the required documents.</li>
+        <li>Allowed file formats: JPEG, PNG, PDF (Max 5MB per file).</li>
+        <li>The system will generate an AI Summary of the application, highlighting key details.</li>
+        <li>Any missing or incorrect information will be shown for correction before submission.</li>
+    </ul>
+    
+    <h2>Required Documents:</h2>
+    <ul>
+        <li>Birth Certificate from the hospital</li>
+        <li>Statement of birth from the hospital or birthplace</li>
+        <li>Parent's marriage certificate</li>
+        <li>Parent's Identification Documents</li>
+        <li>Aadhaar card of parents</li>
+    </ul>
+    
+    <div class="actions">
+        <a href="{% url 'create_birth_certificate' %}" class="btn btn-primary">Continue</a>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+{% endblock %}

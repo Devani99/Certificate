@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Your Applications</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Child Name</th>
+            <th>Status</th>
+            <th>Submitted On</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for app in applications %}
+        <tr>
+            <td>{{ app.child_name }}</td>
+            <td>{{ app.get_status_display }}</td>
+            <td>{{ app.created_at }}</td>
+            <td>
+                <a href="{% url 'application_status' app.id %}" class="btn btn-sm btn-info">View</a>
+                {% if app.status == 'draft' %}
+                <a href="{% url 'upload_documents' app.id %}" class="btn btn-sm btn-warning">Continue</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No applications found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+{% endblock %}

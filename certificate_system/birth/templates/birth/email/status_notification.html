@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Application Status Update</title>
+</head>
+<body>
+    <h2>Birth Certificate Application Status Update</h2>
+    <p>Dear {{ application.user.username }},</p>
+    
+    <p>The status of your birth certificate application for <strong>{{ application.child_name }}</strong> 
+    has been updated to: <strong>{{ status }}</strong></p>
+    
+    {% if status == 'Approved' %}
+    <p>Your certificate is ready for download. Please log in to your account to access it.</p>
+    {% elif status == 'Rejected' %}
+    <p>Please review the application and submit any additional required documents.</p>
+    {% endif %}
+    
+    <p>Thank you for using our service.</p>
+    
+    <p>Sincerely,<br>
+    The Certificate Issuance Team</p>
+</body>
+</html>

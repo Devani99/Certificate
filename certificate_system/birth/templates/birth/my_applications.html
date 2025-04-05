@@ -1,0 +1,44 @@
+{% extends 'birth/base.html' %}
+
+{% block content %}
+<h1>My Applications</h1>
+
+<div class="card mt-4">
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Child Name</th>
+                    <th>Application Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for application in applications %}
+                <tr>
+                    <td>{{ application.child_name }}</td>
+                    <td>{{ application.created_at|date:"F d, Y" }}</td>
+                    <td>
+                        <span class="badge bg-{% if application.status == 'approved' %}success{% elif application.status == 'rejected' %}danger{% else %}warning{% endif %}">
+                            {{ application.get_status_display }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="{% url 'application_status' application.id %}" class="btn btn-sm btn-info">View</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No applications found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div class="mt-3">
+            <a href="{% url 'birth_certificate_instructions' %}" class="btn btn-primary">Create New Application</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

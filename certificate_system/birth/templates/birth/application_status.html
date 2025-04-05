@@ -1,0 +1,31 @@
+{% extends 'birth/base.html' %}
+
+{% block content %}
+<h1>Application Status</h1>
+
+<div class="card mt-4">
+    <div class="card-body">
+        <h2>{{ application.child_name }}'s Birth Certificate Application</h2>
+        <p><strong>Status:</strong> <span class="badge bg-{% if application.status == 'approved' %}success{% elif application.status == 'rejected' %}danger{% else %}warning{% endif %}">{{ application.get_status_display }}</span></p>
+        <p><strong>Application Date:</strong> {{ application.created_at|date:"F d, Y H:i" }}</p>
+        
+        <h3 class="mt-4">Application Details</h3>
+        <p><strong>Parent Name:</strong> {{ application.parent_name }}</p>
+        <p><strong>Parent Aadhaar:</strong> {{ application.parent_aadhaar }}</p>
+        <p><strong>Place of Birth:</strong> {{ application.place_of_birth }}</p>
+        <p><strong>Date of Birth:</strong> {{ application.date_of_birth|date:"F d, Y" }}</p>
+        <p><strong>Permanent Address:</strong> {{ application.permanent_address }}</p>
+        
+        <h3 class="mt-4">Uploaded Documents</h3>
+        <ul>
+            {% for doc in application.documents.all %}
+                <li>{{ doc.document_type }} - <a href="{{ doc.document_file.url }}" target="_blank">View</a></li>
+            {% endfor %}
+        </ul>
+        
+        <div class="mt-4">
+            <a href="{% url 'my_applications' %}" class="btn btn-primary">Back to My Applications</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

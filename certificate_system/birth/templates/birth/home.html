@@ -1,0 +1,55 @@
+{% extends 'birth/base.html' %}
+
+{% block content %}
+<h1>Certificate Issuance</h1>
+
+<div class="container text-center mt-5">
+    {% if not user.is_authenticated %}
+        <h2>Welcome to Certificate System</h2>
+        
+        <div class="mt-4">
+            <a href="{% url 'login' %}" class="btn btn-primary me-2">Login</a>
+            <a href="{% url 'register' %}" class="btn btn-success">Register</a>
+        </div>
+    {% else %}
+        <!-- Your logged-in home content here -->
+        <h2>Welcome back, {{ user.username }}!</h2>
+        <!-- Add your application options here -->
+    {% endif %}
+</div>
+
+<div class="card mt-4">
+    <div class="card-body">
+        <h2 class="card-title">Birth Certificate</h2>
+        <a href="{% url 'birth:birth_certificate_instructions' %}" class="btn btn-primary">Apply</a>
+    </div>
+</div>
+
+<div class="card mt-3">
+    <div class="card-body">
+        <h2 class="card-title">Caste Certificate</h2>
+        <button class="btn btn-secondary" disabled>Coming Soon</button>
+    </div>
+</div>
+
+<div class="card mt-3">
+    <div class="card-body">
+        <h3 class="card-title">Income Certificate</h3>
+        <button class="btn btn-secondary" disabled>Coming Soon</button>
+    </div>
+</div>
+
+<div class="card mt-3">
+    <div class="card-body">
+        <h3 class="card-title">NCL Certificate</h3>
+        <button class="btn btn-secondary" disabled>Coming Soon</button>
+    </div>
+</div>
+
+<div class="card mt-3">
+    <div class="card-body">
+        <h2 class="card-title">Death Certificate</h2>
+        <button class="btn btn-secondary" disabled>Coming Soon</button>
+    </div>
+</div>
+{% endblock %}

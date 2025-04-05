@@ -1,0 +1,68 @@
+{% extends "birth/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Upload Required Documents</h1>
+
+    <!-- Display messages/errors -->
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <h4>Application for {{ application.child_name }}</h4>
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <!-- Birth Certificate -->
+                <div class="mb-3">
+                    <label for="birth_certificate" class="form-label">Birth Certificate from Hospital</label>
+                    <input type="file" class="form-control" id="birth_certificate" name="birth_certificate" required>
+                    <div class="form-text">Upload a clear scan (JPG, PNG, or PDF, max 5MB)</div>
+                </div>
+
+                <!-- Statement of Birth -->
+                <div class="mb-3">
+                    <label for="statement_of_birth" class="form-label">Statement of Birth</label>
+                    <input type="file" class="form-control" id="statement_of_birth" name="statement_of_birth" required>
+                    <div class="form-text">From hospital or birthplace (JPG, PNG, or PDF, max 5MB)</div>
+                </div>
+
+                <!-- Marriage Certificate -->
+                <div class="mb-3">
+                    <label for="marriage_certificate" class="form-label">Parent's Marriage Certificate</label>
+                    <input type="file" class="form-control" id="marriage_certificate" name="marriage_certificate" required>
+                    <div class="form-text">Official marriage document (JPG, PNG, or PDF, max 5MB)</div>
+                </div>
+
+                <!-- Parent Identification -->
+                <div class="mb-3">
+                    <label for="parent_id" class="form-label">Parent's Identification Documents</label>
+                    <input type="file" class="form-control" id="parent_id" name="parent_id" required>
+                    <div class="form-text">Government-issued ID (JPG, PNG, or PDF, max 5MB)</div>
+                </div>
+
+                <!-- Parent Aadhaar -->
+                <div class="mb-3">
+                    <label for="parent_aadhaar" class="form-label">Aadhaar Card of Parents</label>
+                    <input type="file" class="form-control" id="parent_aadhaar" name="parent_aadhaar" required>
+                    <div class="form-text">Front and back in single file (JPG, PNG, or PDF, max 5MB)</div>
+                </div>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                    <a href="{% url 'birth:birth_certificate_application' %}" class="btn btn-secondary me-md-2">Back</a>
+                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
